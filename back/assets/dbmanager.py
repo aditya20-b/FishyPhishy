@@ -22,8 +22,11 @@ class DBManager:
         CREATE TABLE IF NOT EXISTS urls (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             url TEXT NOT NULL,
-            originalurl TEXT NOT NULL,
-            status TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
         """)
+        self.conn.commit()
+
+    def insert(self, url: str):
+        # if url isnt already in the db
+        # then add only those urls to the db
+        #

@@ -17,6 +17,7 @@ class PhishTank:
             f.write(response)
         print("Dumped")
 
+
 if __name__ == "__main__":
     pt = PhishTank()
     asyncio.run(pt.update_db())
