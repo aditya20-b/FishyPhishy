@@ -1,17 +1,14 @@
-import math
-
-
 # fxn jaro distance
 def jaro_distance(s1, s2):
     # If the strings are equal
-    if (s1 == s2):
+    if s1 == s2:
         return 1.0
 
     # Length of two strings
     len1 = len(s1)
     len2 = len(s2)
 
-    if (len1 == 0 or len2 == 0):
+    if len1 == 0 or len2 == 0:
         return 0.0
 
     # Maximum distance upto which matching
@@ -33,14 +30,14 @@ def jaro_distance(s1, s2):
                        min(len2, i + max_dist + 1)):
 
             # If there is a match
-            if (s1[i] == s2[j] and hash_s2[j] == 0):
+            if s1[i] == s2[j] and hash_s2[j] == 0:
                 hash_s1[i] = 1
                 hash_s2[j] = 1
                 match += 1
                 break
 
     # If there is no match
-    if (match == 0):
+    if match == 0:
         return 0.0
 
     # Number of transpositions
@@ -53,28 +50,28 @@ def jaro_distance(s1, s2):
     # there is a third matched character
     # in between the indices
     for i in range(len1):
-        if (hash_s1[i]):
+        if hash_s1[i]:
 
             # Find the next matched character
             # in second string
-            while (hash_s2[point] == 0):
+            while hash_s2[point] == 0:
                 point += 1
 
-            if (s1[i] != s2[point]):
+            if s1[i] != s2[point]:
                 point += 1
                 t += 1
             else:
                 point += 1
 
-        t /= 2;
+        t /= 2
 
     # Return the Jaro Similarity
-    return ((match / len1 + match / len2 + (match - t) / match) / 3.0)
+    return (match / len1 + match / len2 + (match - t) / match) / 3.0
 
 
 # find jaro winkler coefficient
-def jaro_Winkler(s1, s2):
-    jaro_dist = jaro_distance(s1, s2);
+def jaro_winkler(s1, s2):
+    jaro_dist = jaro_distance(s1, s2)
 
     # If the jaro Similarity is above a threshold
     if (jaro_dist > 0.7):
@@ -99,10 +96,3 @@ def jaro_Winkler(s1, s2):
         jaro_dist += 0.1 * prefix * (1 - jaro_dist)
 
     return jaro_dist
-
-
-# Driver code
-if __name__ == "__main__":
-    url1 = input("enter url1")
-    url2 = input("enter url2")
-    print("match coefficient =", jaro_Winkler(url1, url2))
