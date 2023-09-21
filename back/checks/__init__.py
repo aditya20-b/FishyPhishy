@@ -1,3 +1,3 @@
-from regex import RegexCheck
+from .regex import RegexCheck
 
 RegexCheck = RegexCheck
