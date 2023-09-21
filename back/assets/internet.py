@@ -1,26 +1,43 @@
 import aiohttp
 
 
-class AsyncInternet:
-    instance = None
+async def get_text(url: str, **kwargs):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, **kwargs) as response:
+            response = (await response.content.read()).decode('utf-8')
+    return response
 
-    def __new__(cls):
-        # this will be a singleton class
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(AsyncInternet, cls).__new__(cls)
-        return cls.instance
 
-    def __init__(self):
-        self.session = aiohttp.ClientSession()
+async def get_binary(url: str, **kwargs):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, **kwargs) as response:
+            response = (await response.content.read())
+    return response
 
-    async def get(self, url):
-        async with self.session.get(url) as response:
-            return await response.json()
 
-    async def post(self, url, data):
-        async with self.session.post(url, data=data) as response:
-            return await response.json()
+async def get_json(url: str, **kwargs):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, **kwargs) as response:
+            response = (await response.json())
+    return response
 
-    async def close(self):
-        await self.session.close()
 
+async def post(url: str, data: dict = None, params: dict = None):
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, data=data, params=params) as response:
+            response = (await response.content.read()).decode('utf-8')
+    return response
+
+
+async def post_binary(url: str, data: dict = None, params: dict = None):
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, data=data, params=params) as response:
+            response = (await response.content.read())
+    return response
+
+
+async def post_json(url: str, headers: dict = None, data: dict = None, params: dict = None):
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, headers=headers, data=data, params=params) as response:
+            response = (await response.json())
+    return response

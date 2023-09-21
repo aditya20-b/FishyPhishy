@@ -1,14 +1,25 @@
-from . import internet
+import asyncio
+import json
+import pickle
+
+from back.assets import internet
+
 
 class PhishTank:
 
     def __init__(self):
-        self.db_update_url = r"http://data.phishtank.com/data/online-valid.json"
-        self.internet = internet.AsyncInternet()
+        self.tar_url = r"https://github.com/mitchellkrogza/Phishing.Database/raw/master/ALL-phishing-domains.tar.gz"
 
-    def update_db(self):
-        response = self.internet.get(self.db_update_url)
-        return response
-        # todo: write this to a db
-        # sqlite?
+    async def update_db(self):
+        pass
+        print("Getting binary")
+        response = await internet.get_binary(self.tar_url, allow_redirects=True)
+        print("Gotten binary")
+        print(response)
+        with open("phishing_domains.tar.gz", "wb") as f:
+            pickle.dump(response, f)
+        print("Dumped")
 
+if __name__ == "__main__":
+    pt = PhishTank()
+    asyncio.run(pt.update_db())
