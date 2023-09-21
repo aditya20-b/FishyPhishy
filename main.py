@@ -1,6 +1,4 @@
-from back.checks import RegexCheck
-from back.checks.jaro import JaroWinkler
-from back.checks.levenshtein import Levenshtein
+from back.checks import RegexCheck, JaroWinkler, Levenshtein
 
 import urllib.parse
 

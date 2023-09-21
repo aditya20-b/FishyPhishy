@@ -1,5 +1,3 @@
-import urllib.parse
-
 class Levenshtein(object):
     def __init__(self):
         pass
