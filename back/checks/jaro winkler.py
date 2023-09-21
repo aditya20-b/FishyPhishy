@@ -74,7 +74,7 @@ def jaro_winkler(s1, s2):
     jaro_dist = jaro_distance(s1, s2)
 
     # If the jaro Similarity is above a threshold
-    if (jaro_dist > 0.7):
+    if jaro_dist > 0.7:
 
         # Find the length of common prefix
         prefix = 0
@@ -82,7 +82,7 @@ def jaro_winkler(s1, s2):
         for i in range(min(len(s1), len(s2))):
 
             # If the characters match
-            if (s1[i] == s2[i]):
+            if s1[i] == s2[i]:
                 prefix += 1
 
             # Else break
