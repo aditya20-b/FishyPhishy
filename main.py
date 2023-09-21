@@ -1,4 +1,4 @@
-from checks.regex import RegexCheck
+from back.checks import RegexCheck
 
 regex = RegexCheck()
 
