@@ -16,5 +16,14 @@ class DBManager:
     def __del__(self):
         self.conn.close()
 
-    def create_table(self, table_name, columns):
-        pass
+    def create_table(self):
+        # todo: need to rethink the columns
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS urls (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            url TEXT NOT NULL,
+            originalurl TEXT NOT NULL,
+            status TEXT NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        """)

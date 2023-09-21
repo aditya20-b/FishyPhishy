@@ -1,6 +1,4 @@
 import asyncio
-import json
-import pickle
 
 from back.assets import internet
 
@@ -15,9 +13,8 @@ class PhishTank:
         print("Getting binary")
         response = await internet.get_binary(self.tar_url, allow_redirects=True)
         print("Gotten binary")
-        print(response)
         with open("phishing_domains.tar.gz", "wb") as f:
-            pickle.dump(response, f)
+            f.write(response)
         print("Dumped")
 
 if __name__ == "__main__":
