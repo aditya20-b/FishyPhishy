@@ -103,6 +103,8 @@ def jaro_Winkler(s1, s2):
 
 # Driver code
 if __name__ == "__main__":
+
+    #change input source once we get the scam url dataframe
     url1 = input("enter url1")
     url2 = input("enter url2")
     print("match coefficient =", jaro_Winkler(url1, url2))
