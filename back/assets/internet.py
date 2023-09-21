@@ -15,11 +15,11 @@ class AsyncInternet:
 
     async def get(self, url):
         async with self.session.get(url) as response:
-            return await response.text()
+            return await response.json()
 
     async def post(self, url, data):
         async with self.session.post(url, data=data) as response:
-            return await response.text()
+            return await response.json()
 
     async def close(self):
         await self.session.close()
